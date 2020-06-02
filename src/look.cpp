@@ -32,7 +32,7 @@ void Look::build() {
 
 void Look::configure() {
 	mSendServer->setText("send server");
-	mCancel->setText("cancel");
+	mCancel->setText("exit");
 	mCopy->setText("copy");
 	mOrigin->setText("origin");
 	mSend->setText("send");
@@ -129,8 +129,9 @@ void Look::onSend() {
 		}
 		
 		QString data = mTextEdit->toPlainText();
-		if (sendRecv(sock, "uploadData_"+data) != "ok")
-			showMessage("can't send data", Qt::white, Qt::red);
+		QString r = sendRecv(sock, "storeData_"+data);
+		if (r != "ok")
+			showMessage(r, Qt::white, Qt::red);
 		else
 			showMessage("uploaded with sucess", Qt::black, Qt::green);
 	}

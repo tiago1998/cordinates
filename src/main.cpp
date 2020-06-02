@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
 	});
 
 	widget.setUrl(url);
-	widget.showMaximized();//FullScreen();
+	widget.showFullScreen();
 	
 	app.exec();
 

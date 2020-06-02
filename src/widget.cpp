@@ -54,7 +54,7 @@ void Widget::setConnections() {
 	});
 
 	connect (mWebView, &WebView::deletePressed, [&]() {
-		if (mEvents.count() > 0)
+		if (mEvents.count() > 0 && mEvents.last().type() == QMetaType::QString)
 			mEvents.pop_back();
 	});
 
@@ -128,8 +128,11 @@ QString Widget::parseEvents() {
 				ret += ";";
 			pos = event.toPoint();
 			ret += tr("x=%1&y=%2;").arg(pos.x()).arg(pos.y());
-		} else
+		} else {
+			if (typeBefore != QMetaType::QString)
+				ret += "text=";
 			ret += event.toString();
+		}
 		typeBefore = event.type();
 	}
 
